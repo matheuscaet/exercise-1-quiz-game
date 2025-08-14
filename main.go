@@ -21,21 +21,12 @@ func main() {
 	}
 	var correctResults = 0
 	for _, record := range records {
-		//fmt.Println("Record:", record)
+
 		var valuesSum = strings.Split(record[0], "+")
-		//fmt.Println("Values", valuesSum)
-		sum1, err := strconv.Atoi(valuesSum[0])
-		if err != nil {
-			panic(err)
-		}
-		sum2, err := strconv.Atoi(valuesSum[1])
-		if err != nil {
-			panic(err)
-		}
-		result, err := strconv.Atoi(record[1])
-		if err != nil {
-			panic(err)
-		}
+
+		sum1 := getIntValue(valuesSum[0])
+		sum2 := getIntValue(valuesSum[1])
+		result := getIntValue(record[1])
 
 		if sum1+sum2 == result {
 			correctResults++
@@ -44,4 +35,13 @@ func main() {
 
 	fmt.Println("Correct results", correctResults)
 
+}
+
+func getIntValue(s string) int {
+	value, err := strconv.Atoi(s)
+	if err != nil {
+		panic(err)
+	}
+
+	return value
 }
