@@ -4,6 +4,8 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -17,9 +19,29 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	var correctResults = 0
 	for _, record := range records {
-		fmt.Println("Record:", record[0])
+		//fmt.Println("Record:", record)
+		var valuesSum = strings.Split(record[0], "+")
+		//fmt.Println("Values", valuesSum)
+		sum1, err := strconv.Atoi(valuesSum[0])
+		if err != nil {
+			panic(err)
+		}
+		sum2, err := strconv.Atoi(valuesSum[1])
+		if err != nil {
+			panic(err)
+		}
+		result, err := strconv.Atoi(record[1])
+		if err != nil {
+			panic(err)
+		}
+
+		if sum1+sum2 == result {
+			correctResults++
+		}
 	}
+
+	fmt.Println("Correct results", correctResults)
 
 }
